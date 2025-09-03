@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular List UI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Vertical Circular List</h1>
+        <p>Drag to scroll • Inertia & Snap</p>
+
+        <div class="mode-toggle">
+            <button id="mode-toggle-btn" class="toggle-btn">
+                Mode: <span id="mode-display">Infinite</span>
+            </button>
+            <button id="effect-toggle-btn" class="toggle-btn">
+                3D Effect: <span id="effect-display">Off</span>
+            </button>
+        </div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="perspective-slider">Perspective: <span id="perspective-display">1000px</span></label>
+                <input type="range" id="perspective-slider" min="500" max="1500" value="1000" step="50">
+            </div>
+            <div class="control-group">
+                <label for="radius-slider">Cylinder Radius: <span id="radius-display">250px</span></label>
+                <input type="range" id="radius-slider" min="50" max="1000" value="250" step="10">
+            </div>
+            <div class="control-group">
+                <label for="resistance-slider">Resistance: <span id="resistance-display">1.0</span></label>
+                <input type="range" id="resistance-slider" min="0.0" max="5.0" value="1.0" step="0.1">
+            </div>
+        </div>
+
+        <div class="circular-list-container">
+            <div class="viewport">
+                <div class="circular-list" id="circular-list">
+                    <div class="list-item" data-value="Monday">Monday</div>
+                    <div class="list-item" data-value="Tuesday">Tuesday</div>
+                    <div class="list-item" data-value="Wednesday">Wednesday</div>
+                    <div class="list-item" data-value="Thursday">Thursday</div>
+                    <div class="list-item" data-value="Friday">Friday</div>
+                    <div class="list-item" data-value="Saturday">Saturday</div>
+                    <div class="list-item" data-value="Sunday">Sunday</div>
+                </div>
+                <div class="selection-indicator"></div>
+            </div>
+        </div>
+
+        <div class="selected-value">
+            Selected: <span id="selected-display">Monday</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

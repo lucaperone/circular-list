@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2d3748;
+}
+
+p {
+  color: #718096;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.mode-toggle {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.toggle-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
+}
+
+.toggle-btn:active {
+  transform: translateY(0);
+}
+
+#mode-display,
+#effect-display {
+  font-weight: 600;
+}
+
+.controls {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.control-group label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #4a5568;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control-group input[type="range"] {
+  width: 100%;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 3px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.control-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-group input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.lists-container {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.circular-list-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 2rem;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  transform-style: preserve-3d; /* Ensure 3D context is maintained */
+}
+
+.circular-list {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  user-select: none;
+  transform-style: preserve-3d;
+  --perspective: 1000px;
+  perspective: var(--perspective);
+  perspective-origin: 50% 50%;
+}
+
+.circular-list.dragging {
+  cursor: grabbing;
+}
+
+.list-item {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #4a5568;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  margin: 2px 0;
+  /* transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); */
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  backdrop-filter: blur(5px);
+  transform-style: preserve-3d; /* Ensure individual items maintain 3D context */
+  backface-visibility: visible; /* Allow both sides to be visible for better 3D effect */
+}
+
+.list-item:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.list-item.selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.circular-list:focus {
+  outline: none;
+}
+
+.circular-list-container:focus-within {
+  outline: 2px solid #667eea;
+  border-radius: 14px;
+}
+
+.selection-indicator {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  height: 50px;
+  transform: translateY(-50%);
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.6;
+  background: rgba(102, 126, 234, 0.05);
+}
+
+.selected-value {
+  background: rgba(102, 126, 234, 0.1);
+  border: 1px solid rgba(102, 126, 234, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  font-weight: 500;
+  color: #4a5568;
+}
+
+.selected-value span {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/* 3D Cylinder Effect */
+.circular-list-container.cylinder-3d {
+  /* Force hardware acceleration for better 3D rendering */
+  will-change: transform;
+  transform: translateZ(0); /* Create a new stacking context */
+}
+
+.circular-list-container.cylinder-3d .viewport {
+  transform-style: preserve-3d;
+  /* Ensure no flattening occurs */
+  will-change: transform;
+}
+
+.circular-list-container.cylinder-3d .circular-list {
+  transform-style: preserve-3d;
+  /* Force GPU acceleration */
+  will-change: transform;
+}
+
+.circular-list-container.cylinder-3d .list-item {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  /* Force hardware acceleration for each item */
+  will-change: transform;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .circular-list-container {
+    width: 250px;
+    height: 180px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}
